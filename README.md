@@ -1,4 +1,4 @@
-.checkout
+WebShop
 =========
 
-A Symfony project created on May 5, 2017, 4:09 pm.
+A Symfony project for SoftUni PHP MVC Framework course.
