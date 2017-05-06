@@ -6,6 +6,7 @@ use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -50,5 +51,17 @@ class UserController extends Controller
             'user/register.html.twig',
             array('form' => $form->createView())
         );
+    }
+
+    /**
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Route("/profile", name="profile")
+     */
+    public function profileAction()
+    {
+        $user = $this->getUser();
+        //TODO add products
+
+        return $this->render('user/profile.html.twig', ['user' => $user]);
     }
 }

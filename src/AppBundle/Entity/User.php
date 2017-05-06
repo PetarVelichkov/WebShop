@@ -274,4 +274,3 @@ class User implements UserInterface
 }
 
 //TODO add $products[]
-//TODO user role doesn't work

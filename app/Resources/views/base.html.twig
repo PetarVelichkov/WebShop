@@ -1,135 +1,139 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="robots" content="all,follow">
-        <meta name="googlebot" content="index,follow,snippet,archive">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Obaju e-commerce template">
-        <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
-        <meta name="keywords" content="">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Obaju e-commerce template">
+    <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
+    <meta name="keywords" content="">
 
-        <title>{% block title %}Webshop{% endblock %}</title>
-        {% block stylesheets %}
-            <link href='{{ asset('http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100') }}' rel='stylesheet' type='text/css'>
-            <!-- styles -->
-            <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/owl.carousel.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/owl.theme.css') }}" rel="stylesheet">
+    <title>{% block title %}Webshop{% endblock %}</title>
+    {% block stylesheets %}
+        <link href='{{ asset('http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100') }}' rel='stylesheet'
+              type='text/css'>
+        <!-- styles -->
+        <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/owl.carousel.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/owl.theme.css') }}" rel="stylesheet">
 
-            <!-- theme stylesheet -->
-            <link href="{{ asset('css/style.default.css') }}" rel="stylesheet" id="theme-stylesheet">
+        <!-- theme stylesheet -->
+        <link href="{{ asset('css/style.default.css') }}" rel="stylesheet" id="theme-stylesheet">
 
-            <!-- your stylesheet with modifications -->
-            <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+        <!-- your stylesheet with modifications -->
+        <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
-            <script src="{{ asset('js/respond.min.js') }}"></script>
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    {% block top %}
+        <script src="{{ asset('js/respond.min.js') }}"></script>
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+{% block top %}
 
-        <div id="top">
-            <div class="container">
-                <div class="col-md-12" data-animate="fadeInDown">
-                    <ul class="menu">
-                        {% if app.user %}
-                            <li>
-                                <a href="#">
-                                    Profile
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ path('security_logout') }}">
-                                    Logout
-                                </a>
-                            </li>
-                        {% else %}
-                            <li>
-                                <a href="{{ path('security_login') }}">
-                                    Login
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ path('user_register') }}">
-                                    Register
-                                </a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
+    <div id="top">
+        <div class="container">
+            <div class="col-md-12" data-animate="fadeInDown">
+                <ul class="menu">
+                    {% if app.user %}
+                        <li>
+                            <a href="{{ path('profile') }}">
+                                My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('security_logout') }}">
+                                Logout
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('security_login') }}">
+                                Login
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('user_register') }}">
+                                Register
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
+    </div>
 
-    {% endblock %}
+{% endblock %}
 
-    <!-- *** TOP BAR END *** -->
+<!-- *** TOP BAR END *** -->
 
-    {% block navbar %}
+{% block navbar %}
 
-        <!-- *** NAVBAR *** -->
+    <!-- *** NAVBAR *** -->
 
 
-        <div class="navbar navbar-default yamm" role="navigation" id="navbar">
-            <div class="container">
-                <div class="navbar-header">
-                    <div class="navbar-buttons">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
-                            <span class="sr-only">Toggle navigation</span>
-                            <i class="fa fa-align-justify"></i>
-                        </button>
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search">
-                            <span class="sr-only">Toggle search</span>
-                            <i class="fa fa-search"></i>
-                        </button>
-                        <a class="btn btn-default navbar-toggle" href="">
-                            <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
-                        </a>
-                    </div>
-                </div>
-                <!--/.navbar-header -->
-
-                <div class="navbar-collapse collapse" id="navigation">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li><a href="{{ path('homepage') }}">Webshop</a>
-                        </li>
-                        <li class="active"><a href="{{ path('homepage') }}">Home</a>
-                        </li>
-                        <li><a href="#">Products</a>
-                        </li>
-                    </ul>
-                </div>
-
+    <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
                 <div class="navbar-buttons">
-
-                    <div class="navbar-collapse collapse right" id="basket-overview">
-                        <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
-                    </div>
-                    <!--/.nav-collapse -->
-
-                    <div class="navbar-collapse collapse right" id="search-not-mobile">
-                        <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
-                            <span class="sr-only">Toggle search</span>
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-align-justify"></i>
+                    </button>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search">
+                        <span class="sr-only">Toggle search</span>
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <a class="btn btn-default navbar-toggle" href="">
+                        <i class="fa fa-shopping-cart"></i> <span class="hidden-xs">3 items in cart</span>
+                    </a>
                 </div>
             </div>
+            <!--/.navbar-header -->
+
+            <div class="navbar-collapse collapse" id="navigation">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="{{ path('homepage') }}">Webshop</a>
+                    </li>
+                    <li class="active"><a href="{{ path('homepage') }}">Home</a>
+                    </li>
+                    <li><a href="#">Products</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="navbar-buttons">
+
+                <div class="navbar-collapse collapse right" id="basket-overview">
+                    <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span
+                                class="hidden-sm">3 items in cart</span></a>
+                </div>
+                <!--/.nav-collapse -->
+
+                <div class="navbar-collapse collapse right" id="search-not-mobile">
+                    <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse"
+                            data-target="#search">
+                        <span class="sr-only">Toggle search</span>
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+
+            </div>
         </div>
+    </div>
 
-    {% endblock %}
+{% endblock %}
 
-    {% block body %}
+{% block body %}
+    <div id="all">
 
+        <div id="content">
+            <div class="container">
 
-        <div id="all">
+                {% block sidebar %}
 
-            <div id="content">
-                <div class="container">
                     <div class="col-md-3">
                         <!-- *** MENUS AND FILTERS ***
      _________________________________________________________ -->
@@ -155,25 +159,31 @@
                                         </ul>
                                     </li>
                                 </ul>
-
                             </div>
                         </div>
                     </div>
-                </div>
+
+                {% endblock %}
+
+                {% block main %}
+
+
+                {% endblock %}
+
             </div>
         </div>
+    </div>
+{% endblock %}
 
-        {% endblock %}
-
-        {% block javascripts %}
-            <script src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
-            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('js/jquery.cookie.js') }}"></script>
-            <script src="{{ asset('js/waypoints.min.js') }}"></script>
-            <script src="{{ asset('js/modernizr.js') }}"></script>
-            <script src="{{ asset('js/bootstrap-hover-dropdown.js') }}"></script>
-            <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-            <script src="{{ asset('js/front.js') }}"></script>
-        {% endblock %}
-    </body>
+{% block javascripts %}
+    <script src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.cookie.js') }}"></script>
+    <script src="{{ asset('js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('js/modernizr.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-hover-dropdown.js') }}"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/front.js') }}"></script>
+{% endblock %}
+</body>
 </html>

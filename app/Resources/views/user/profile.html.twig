@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div id="all">
+
+        <div id="content">
+            <div class="container">
+
+
+                {% block sidebar %}
+
+                    <div class="col-md-3">
+                        <!-- *** CUSTOMER MENU ***-->
+
+                        <div class="panel panel-default sidebar-menu">
+
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Customer section</h3>
+                            </div>
+
+                            <div class="panel-body">
+
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li class="active">
+                                        <a href="{{ path('profile') }}"><i class="fa fa-user"></i> My account</a>
+                                    </li>
+                                    <li>
+                                        <a href="customer-orders.html"><i class="fa fa-list"></i> My orders</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('security_logout') }}"><i class="fa fa-sign-out"></i>
+                                            Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <!-- /.col-md-3 -->
+
+                        <!-- *** CUSTOMER MENU END *** -->
+                    </div>
+                {% endblock %}
+
+                {% block main %}
+                    <div class="col-md-8">
+                        <div class="box">
+                            <h1>Hello, {{ user.fullName }}</h1>
+                            <hr/>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3>Account details</h3>
+                                </div>
+
+                                <div class="panel-body">
+                                    <table class="table table-responsive">
+                                        <tbody>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td><strong> {{ user.email }} </strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td><strong> {{ user.fullName }} </strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Money:</td>
+                                            <td><strong> {{ user.money }} </strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Role(s):</td>
+                                            <td>
+                                                <strong>
+                                                    {% if app.getUser().isEditor() and app.getUser().isAdmin() %}
+                                                        Admin, Editor
+                                                    {% elseif app.getUser().isAdmin() %}
+                                                        Admin
+                                                    {% elseif app.getUser().isEditor() %}
+                                                        Editor
+                                                    {% else %}
+                                                        User
+                                                    {% endif %}
+                                                </strong>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
