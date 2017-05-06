@@ -2,14 +2,17 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
+use AppBundle\Entity\Product;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CategoryController extends Controller
 {
-    public function listCategoryAction()
+    public function listAction()
     {
-
-
-        return $this->render('', array('name' => $name));
+//        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+//
+//        return $this->render('webshop/category.html.twig', ['categories' => $categories]);
     }
 }

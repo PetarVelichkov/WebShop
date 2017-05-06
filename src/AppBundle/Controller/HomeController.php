@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,12 +11,13 @@ class HomeController extends Controller
 {
     /**
      * @Route("/", name="homepage")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
-        // replace this example code with whatever you need
-        return $this->render('webshop/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);
+
+//        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+
+        return $this->render('webshop/index.html.twig');
     }
 }

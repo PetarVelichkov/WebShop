@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
@@ -47,6 +48,7 @@ class UserController extends Controller
 
             return $this->redirectToRoute('homepage');
         }
+
 
         return $this->render(
             'user/register.html.twig',

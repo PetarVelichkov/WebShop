@@ -131,12 +131,11 @@
 
         <div id="content">
             <div class="container">
-
                 {% block sidebar %}
 
                     <div class="col-md-3">
                         <!-- *** MENUS AND FILTERS ***
-     _________________________________________________________ -->
+                    _________________________________________________________ -->
                         <div class="panel panel-default sidebar-menu">
 
                             <div class="panel-heading">
@@ -144,21 +143,12 @@
                             </div>
 
                             <div class="panel-body">
-                                <ul class="nav nav-pills nav-stacked category-menu">
-                                    <li>
-                                        <a href="#">Men <span class="badge pull-right">42</span></a>
-                                        <ul>
-                                            {##TODO categories#}
-                                            <li><a href="#">T-shirts</a>
-                                            </li>
-                                            <li><a href="#">Shirts</a>
-                                            </li>
-                                            <li><a href="#">Pants</a>
-                                            </li>
-                                            <li><a href="#">Accessories</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                <ul class="nav nav-pills nav-stacked ">
+
+                                    {% for category in categories.categories %}
+                                        <li><a href="#">{{ category.name }}</a></li>
+                                    {% endfor %}
+
                                 </ul>
                             </div>
                         </div>
