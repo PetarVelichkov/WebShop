@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User implements UserInterface
@@ -53,7 +53,7 @@ class User implements UserInterface
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role", inversedBy="users")
      * @ORM\JoinTable(name="users_role", joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}, inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")})
      */
     private $roles;
@@ -62,6 +62,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     /**
@@ -269,8 +270,36 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        return null;
+    }
+
+    function __toString()
+    {
+        return $this->fullName;
+    }
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="owner")
+     */
+    private $products;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getProducts(): ArrayCollection
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param Product $product
+     * @return User
+     */
+    public function addProducts(Product $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
     }
 }
-
-//TODO add $products[]

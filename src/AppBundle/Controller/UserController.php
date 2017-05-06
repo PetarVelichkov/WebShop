@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Product;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
@@ -60,8 +61,11 @@ class UserController extends Controller
     public function profileAction()
     {
         $user = $this->getUser();
-        //TODO add products
+        $products = $this->getDoctrine()->getRepository(Product::class)
+                    ->findAll([
+                        'owner_id' => $this->getUser()->getId()
+                    ]);
 
-        return $this->render('user/profile.html.twig', ['user' => $user]);
+        return $this->render('user/profile.html.twig', ['user' => $user, 'products' => $products]);
     }
 }
