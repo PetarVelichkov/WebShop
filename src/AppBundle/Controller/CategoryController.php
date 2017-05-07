@@ -20,4 +20,6 @@ class CategoryController extends Controller
 
         return $this->render('webshop/viewCategory.html.twig', ['products' => $products]);
     }
+
+    //TODO add category
 }

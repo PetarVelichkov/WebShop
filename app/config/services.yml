@@ -12,3 +12,7 @@ services:
         arguments: [ '@doctrine.orm.entity_manager' ]
         calls:
          - method: getCategories
+
+    app.picture_uploader:
+        class: AppBundle\Services\FileUploader
+        arguments: ['%upload_dir%']

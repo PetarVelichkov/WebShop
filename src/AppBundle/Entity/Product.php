@@ -62,7 +62,7 @@ class Product
      *
      * @ORM\Column(name="isDelete", type="boolean")
      */
-    private $isDelete = true;
+    private $isDelete = false;
 
     /**
      * @var int

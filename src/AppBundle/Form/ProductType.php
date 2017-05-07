@@ -19,7 +19,7 @@ class ProductType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('quantity', IntegerType::class)
-            ->add('info', TextareaType::class)
+            ->add('description', TextareaType::class)
             ->add('price', MoneyType::class)
             ->add('picture', FileType::class,['label' => 'Picture'])
             ->add("category");
