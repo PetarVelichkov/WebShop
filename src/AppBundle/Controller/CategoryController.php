@@ -19,7 +19,10 @@ class CategoryController extends Controller
      */
     public function viewCategoryAction($id)
     {
-        $products = $this->getDoctrine()->getRepository(Product::class)->findBy(['category' => $id]);
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
+
+        /** @var Product[] $products */
+        $products = $category->getProducts()->toArray();
 
         return $this->render('webshop/viewCategory.html.twig', ['products' => $products]);
     }
@@ -52,6 +55,7 @@ class CategoryController extends Controller
             if ($exist) {
                 return $this->redirectToRoute('products');
             }
+
 
             $em->persist($category);
             $em->flush();

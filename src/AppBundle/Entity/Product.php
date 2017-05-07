@@ -117,7 +117,7 @@ class Product
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category",inversedBy="products", fetch="EXTRA_LAZY")
      */
     private $category;
 
