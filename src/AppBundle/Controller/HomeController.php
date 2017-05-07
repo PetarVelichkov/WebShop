@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Product;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,15 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
+        $repo = $this->getDoctrine()->getRepository(Product::class);
+        $products = $repo->createQueryBuilder('pr')
+            ->where('pr.quantity > 0')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
 
-        return $this->render('webshop/index.html.twig');
+        return $this->render('webshop/index.html.twig',[
+            "products" => $products
+        ]);
     }
 }

@@ -50,7 +50,7 @@ class ProductController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/add", name="add_product")
+     * @Route("/add_product", name="add_product")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -86,4 +86,7 @@ class ProductController extends Controller
 
         return $this->render('webshop/newProduct.html.twig', ['form' => $form->createView()]);
     }
+
+
+    //TODO edit product
 }
