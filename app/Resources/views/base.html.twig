@@ -37,6 +37,7 @@
         <div class="container">
             <div class="col-md-12" data-animate="fadeInDown">
                 <ul class="menu">
+
                     {% if app.user %}
                         <li>
                             <a href="{{ path('profile') }}">
@@ -99,8 +100,18 @@
                     </li>
                     <li class="active"><a href="{{ path('homepage') }}">Home</a>
                     </li>
-                    <li><a href="#">Products</a>
+                    <li><a href="{{ path('products') }}">Products</a>
                     </li>
+
+                    {% if app.getUser() and (app.getUser().isAdmin() or app.getUser().isEditor()) %}
+                        <li><a>|</a></li>
+                        <li><a href="{{ path('add_product') }}">Add product</a>
+                        </li>
+                        <li><a href="{{ path('add_product') }}">Add category</a>
+                        </li>
+
+                    {% endif %}
+
                 </ul>
             </div>
 

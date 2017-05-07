@@ -16,8 +16,6 @@ class HomeController extends Controller
     public function indexAction()
     {
 
-//        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-
         return $this->render('webshop/index.html.twig');
     }
 }

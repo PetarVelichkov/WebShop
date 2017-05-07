@@ -1,2 +1,45 @@
 {% extends 'base.html.twig' %}
 
+{% block main %}
+    <div class="col-md-9">
+        <div class="row products">
+            {% for product in products %}
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="product">
+                        <div class="flip-container">
+                            <div class="flipper">
+                                <div class="front">
+                                    <a href="{{ path('product_view', {id:product.id}) }}">
+                                        <img src="{{ asset(product.picture) }}" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="back">
+                                    <a href="{{ path('product_view', {id:product.id}) }}">
+                                        <img src="{{ asset(product.picture) }}" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ path('product_view', {id:product.id}) }}" class="invisible">
+                            <img src="{{ asset(product.getPicture()) }}" alt="" class="img-responsive">
+                        </a>
+                        <div class="text">
+                            <h3><a href="{{ path('product_view', {id:product.id}) }}">{{ product.description }}</a></h3>
+                            <p class="price">€{{ product.price }}</p>
+                            <p class="price">Quantity: {{ product.quantity }}</p>
+                            <p class="buttons">
+                                <a href="{{ path('product_view', {id:product.id}) }}" class="btn btn-default">View detail</a>
+                                <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            </p>
+                        </div>
+                        <!-- /.text -->
+                    </div>
+                    <!-- /.product -->
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

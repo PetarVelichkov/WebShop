@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function viewCategoryAction($id)
     {
-        $products = $this->getDoctrine()->getRepository(Product::class)->find($id);
+        $products = $this->getDoctrine()->getRepository(Product::class)->findBy(['category' => $id]);
 
         return $this->render('webshop/viewCategory.html.twig', ['products' => $products]);
     }

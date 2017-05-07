@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Product;
 use AppBundle\Form\ProductType;
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,7 +17,6 @@ class ProductController extends Controller
     /**
      * @Route("/products", name="products")
      *
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -34,9 +34,23 @@ class ProductController extends Controller
     }
 
     /**
+     * @param $id
+     *
+     * @Route("/product/{id}", name="product_view")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewProduct($id)
+    {
+        $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
+
+        return $this->render('webshop/product.html.twig', ['product' => $product]);
+    }
+
+
+    /**
      * @param Request $request
      *
-     * @Route("/product/add", name="product_add")
+     * @Route("/add", name="add_product")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -44,7 +58,7 @@ class ProductController extends Controller
     public function addProduct(Request $request)
     {
         if(!$this->getUser()->isEditor() && !$this->getUser()->isAdmin()) {
-                return $this->redirectToRoute('products');
+            return $this->redirectToRoute('products');
         }
 
         $product = new Product();
@@ -54,15 +68,15 @@ class ProductController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $product->setOwner($this->getUser());
 
+            $product->setOwner($this->getUser());
 
             /** @var UploadedFile $file */
             $file = $product->getPicture();
 
             $fileName = $this->get('app.picture_uploader')->upload($file);
 
-            $product->setPicture($fileName);
+            $product->setPicture('uploadImage/' . $fileName);
 
             $em->persist($product);
             $em->flush();

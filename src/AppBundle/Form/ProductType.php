@@ -21,7 +21,7 @@ class ProductType extends AbstractType
             ->add('quantity', IntegerType::class)
             ->add('description', TextareaType::class)
             ->add('price', MoneyType::class)
-            ->add('picture', FileType::class,['label' => 'Picture'])
+            ->add('picture', FileType::class)
             ->add("category");
     }
 
