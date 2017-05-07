@@ -144,11 +144,13 @@
 
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked ">
-
-                                    {% for category in categories.categories %}
-                                        <li><a href="#">{{ category.name }}</a></li>
-                                    {% endfor %}
-
+                                    {% if categories.categories|length > 0 %}
+                                        {% for category in categories.categories %}
+                                            <li><a href="{{ path('category_id', {id:category.id}) }}">{{ category.name }}</a></li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li class="text-muted">No categories</li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>

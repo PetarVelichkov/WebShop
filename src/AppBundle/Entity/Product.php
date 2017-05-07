@@ -39,9 +39,9 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="info", type="text")
+     * @ORM\Column(name="description", type="text")
      */
-    private $info;
+    private $description;
 
     /**
      * @var string
@@ -197,27 +197,27 @@ class Product
     }
 
     /**
-     * Set info
+     * Set description
      *
-     * @param string $info
+     * @param string $description
      *
      * @return Product
      */
-    public function setInfo($info)
+    public function setDescription($description)
     {
-        $this->info = $info;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get info
+     * Get description
      *
      * @return string
      */
-    public function getInfo()
+    public function getDescription()
     {
-        return $this->info;
+        return $this->description;
     }
 
     /**

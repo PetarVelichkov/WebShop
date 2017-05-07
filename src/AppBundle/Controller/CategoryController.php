@@ -9,10 +9,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CategoryController extends Controller
 {
-    public function listAction()
+    /**
+     * @Route("/category/{id}", name="category_id")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewCategoryAction($id)
     {
-//        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-//
-//        return $this->render('webshop/category.html.twig', ['categories' => $categories]);
+        $products = $this->getDoctrine()->getRepository(Product::class)->find($id);
+
+        return $this->render('webshop/viewCategory.html.twig', ['products' => $products]);
     }
 }

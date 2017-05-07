@@ -15,19 +15,19 @@ class CategoryContainer
         $this->em = $em;
     }
 
+// For more info - http://symfony.com/doc/current/doctrine.html
+
     public function getCategories()
     {
+        $repository = $this->em->getRepository('AppBundle:Category');
 
-        $repo = $this->em->getRepository('AppBundle:Category');
+        $query = $repository->createQueryBuilder('cat')
+            ->select('cat')
+            ->orderBy('cat.id', 'ASC')
+            ->getQuery();
 
-        $categories = $repo->createQueryBuilder('c')
-            ->select("c")
-            ->orderBy('c.id', 'ASC')
-            ->getQuery()
-            ->getResult();
+        $categories = $query->getResult();
 
-        $this->categories = $categories;
-
-        return $this->categories;
+        return $this->categories = $categories;
     }
 }
