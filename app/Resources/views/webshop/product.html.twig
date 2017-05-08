@@ -1,4 +1,46 @@
 {% extends 'base.html.twig' %}
 
+{% block main %}
 
+<div class="col-md-9">
+    <div class="row" id="productMain">
+        <div class="col-sm-6">
+            <div id="mainImage">
+                <img src="{{ asset(product.picture) }}" alt="" class="img-responsive">
+            </div>
+
+            <div class="ribbon sale">
+                <div class="theribbon">SALE</div>
+                <div class="ribbon-background"></div>
+            </div>
+            <!-- /.ribbon -->
+
+            <div class="ribbon new">
+                <div class="theribbon">NEW</div>
+                <div class="ribbon-background"></div>
+            </div>
+            <!-- /.ribbon -->
+
+        </div>
+
+        <div class="col-sm-6">
+            <div class="box">
+                <h1 class="text-center">{{ product.name }}</h1>
+                <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details</a>
+                </p>
+                <p class="price">€{{ product.price }}</p>
+
+                <p class="text-center buttons">
+                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="box" id="details">
+        <h3>Product details</h3>
+        <p>{{ product.description }}</p>
+    </div>
+</div>
+
+{% endblock %}
 

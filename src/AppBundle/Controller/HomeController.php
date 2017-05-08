@@ -19,7 +19,7 @@ class HomeController extends Controller
         $repo = $this->getDoctrine()->getRepository(Product::class);
         $products = $repo->createQueryBuilder('pr')
             ->where('pr.quantity > 0')
-            ->setMaxResults(3)
+            ->setMaxResults(6)
             ->getQuery()
             ->getResult();
 
