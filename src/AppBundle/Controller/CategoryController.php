@@ -27,46 +27,4 @@ class CategoryController extends Controller
         return $this->render('webshop/viewCategory.html.twig', ['products' => $products]);
     }
 
-    /**
-     * @Route("add_category", name="add_category")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     *
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function addCategory(Request $request)
-    {
-        if(!$this->getUser()->isEditor() && !$this->getUser()->isAdmin()) {
-            return $this->redirectToRoute('products');
-        }
-
-        $category = new Category();
-
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
-            $exist = $this->getDoctrine()->getRepository(Category::class)->findBy([
-                'name' => $form->get('name')->getData()
-            ]);
-
-            if ($exist) {
-                return $this->redirectToRoute('products');
-            }
-
-
-            $em->persist($category);
-            $em->flush();
-
-            return $this->redirectToRoute('products');
-        }
-
-        return $this->render('webshop/addCategory.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
-    //TODO edit category
 }

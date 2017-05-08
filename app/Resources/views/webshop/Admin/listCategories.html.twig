@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+
+{% block main %}
+    <div class="col-md-8">
+        <div class="panel-heading">
+            <h3 class="panel-title">Categories</h3>
+        </div>
+
+        <div class="panel-body">
+            <ul class="list-group">
+                {% if categories.categories|length > 0 %}
+                    {% for category in categories.categories %}
+                        <li class="list-group-item">
+                            {{ category.name }}
+                            <button class="ri">Edit</button>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li class="text-muted">No categories</li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
