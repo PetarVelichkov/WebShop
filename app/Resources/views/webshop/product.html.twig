@@ -30,9 +30,25 @@
                 </p>
                 <p class="price">€{{ product.price }}</p>
 
-                <p class="text-center buttons">
+                <div class="text-center buttons">
                     <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                </p>
+                </div>
+                {% if app.getUser() and app.getUser().isAdmin() %}
+
+                    <div class="text-right text-center">
+                        <a class="btn btn-primary" href="{{ path('admin_edit_product', {id:product.id}) }}"><span class="fa fa-edit"></span> Edit</a>
+                        <a class="btn btn-danger" href="{{ path('delete_product', {id:product.id}) }}"><span class="fa fa-trash-o"></span> Delete</a>
+                    </div>
+
+                {% endif %}
+
+                {% if app.getUser() and app.getUser().isEditor() %}
+                    <div class="text-right text-center">
+                        <a class="btn btn-primary" href="{{ path('editor_edit_product', {id:product.id}) }}"><span class="fa fa-edit"></span> Edit</a>
+                        <a class="btn btn-danger" href="{{ path('delete_product', {id:product.id}) }}"><span class="fa fa-trash-o"></span> Delete</a>
+                    </div>
+                {% endif %}
+
             </div>
         </div>
     </div>

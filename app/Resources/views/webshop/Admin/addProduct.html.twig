@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+
+
+    <div id="all">
+
+        <div id="content">
+            <div class="container">
+                <div class="col-md-6">
+                    <div class="box">
+                        <h2 class="text-center text-muted">Adding a new product</h2>
+                        <hr/>
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <div class="text-center">
+                            <a class="btn btn-warning" href="{{ path('homepage') }}"><span class="fa fa-undo"></span> Cancel</a>
+                            <button type="submit" class="btn btn-primary"><span class="fa fa-plus"></span> Add Product</button>
+                        </div>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

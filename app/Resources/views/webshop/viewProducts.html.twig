@@ -3,28 +3,35 @@
 {% block main %}
     <div class="col-md-9">
         <div class="row products">
-            {% for product in products %}
+            {% for index,product in products %}
+                {% if index % 3 == 0 and index > 0 %}
+                    </div>
+                    <div class="row">
+                {% else %}
 
-                <div class="col-md-4 col-sm-6">
+                {% endif %}
+                <div class="col-sm-6 col-md-4">
                     <div class="product">
                         <div class="flip-container">
                             <div class="flipper">
 
                                 <div class="front">
                                     <a href="{{ path('product_view', {id:product.id}) }}">
-                                        <img src="{{ asset(product.picture) }}" alt="" class="img-responsive custom">
+                                        <img src="{{ asset(product.picture) }}" alt="" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="back">
                                     <a href="{{ path('product_view', {id:product.id}) }}">
-                                        <img src="{{ asset(product.picture) }}" alt="" class="img-responsive custom">
+                                        <img src="{{ asset(product.picture) }}" alt="" class="img-responsive">
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <a href="{{ path('product_view', {id:product.id}) }}" class="invisible">
-                            <img src="{{ asset(product.getPicture()) }}" alt="" class="img-responsive custom">
+
+                        <a href="{{ path('product_view', {id:product.id}) }}" class="visible">
+                            <img src="{{ asset(product.getPicture()) }}" alt="" class="img-responsive">
                         </a>
+
                         <div class="text">
                             <h3><a href="{{ path('product_view', {id:product.id}) }}">{{ product.name }}</a></h3>
                             <p class="price">€{{ product.price }}</p>

@@ -136,9 +136,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{{ path('add_product') }}">Add Product</a>
                         </li>
-                        <li><a href="{{ path('add_category') }}">Add Category</a>
-                        </li>
-                        <li><a href="{{ path('view_categories') }}">View Categories</a>
+                        <li><a href="{{ path('view_categories') }}">Edit Categories</a>
                         </li>
                     </ul>
                 </div>
@@ -146,6 +144,11 @@
         </div>
     {% endif %}
 
+{% endblock %}
+
+{% block flash %}
+    {% include 'flash.html.twig' %}
+    {#TODO da dobavq flash message navsqkade#}
 {% endblock %}
 
 {% block body %}

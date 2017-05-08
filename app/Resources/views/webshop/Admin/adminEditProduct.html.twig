@@ -2,7 +2,7 @@
 
 {% block main %}
 
-    <h2>Adding a new product</h2>
+
 
     <div id="all">
 
@@ -10,12 +10,13 @@
             <div class="container">
                 <div class="col-md-6">
                     <div class="box">
-
+                        <h2 class="text-muted text-center">Edit product</h2>
+                        <hr/>
                         {{ form_start(form) }}
                         {{ form_widget(form) }}
                         <div class="text-center">
-                            <a class="btn btn-warning" href="{{ path('homepage') }}">Cancel</a>
-                            <button type="submit" class="btn btn-primary">Add Product</button>
+                            <a class="btn btn-warning" href="{{ path('product_view', {id:product.id}) }}"><span class="fa fa-undo"></span> Cancel</a>
+                            <button type="submit" class="btn btn-primary"><span class="fa fa-edit"></span> Edit</button>
                         </div>
                     </div>
 
@@ -25,5 +26,5 @@
         </div>
     </div>
 
-
 {% endblock %}
+

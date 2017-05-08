@@ -2,7 +2,7 @@
 
 {% block main %}
 
-    <h2>Adding a new category</h2>
+
 
     <div id="all">
 
@@ -10,12 +10,13 @@
             <div class="container">
                 <div class="col-md-6">
                     <div class="box">
-
+                        <h2 class="text-muted text-center">Adding a new category</h2>
+                        <hr/>
                         {{ form_start(form) }}
                         {{ form_widget(form) }}
                         <div class="text-center">
-                            <a class="btn btn-warning" href="{{ path('homepage') }}">Cancel</a>
-                            <button type="submit" class="btn btn-primary">Add Category</button>
+                            <a class="btn btn-warning" href="{{ path('view_categories') }}"><span class="fa fa-undo"></span> Cancel</a>
+                            <button type="submit" class="btn btn-primary"><span class="fa fa-plus"></span> Add Category</button>
                         </div>
                     </div>
 

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+
+
+    <div id="all">
+
+        <div id="content">
+            <div class="container">
+                <div class="col-md-8">
+                    <div class="box">
+                        <h2 class="text-center text-muted">Are you sure your want to delete this category?</h2>
+                        <hr/>
+                        <div class="text-center">
+                            <a class="btn btn-warning" href="{{ path('view_categories')}}"><span class="fa fa-undo"></span> Cancel</a>
+                            <a class="btn btn-danger" href="{{ path('confirm_delete_category', {id: id}) }}"><span class="fa fa-trash-o"></span> Delete</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

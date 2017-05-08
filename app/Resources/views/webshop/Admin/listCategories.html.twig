@@ -2,24 +2,37 @@
 
 
 {% block main %}
-    <div class="col-md-8">
-        <div class="panel-heading">
-            <h3 class="panel-title">Categories</h3>
-        </div>
+    <div class="col-md-6">
+        <div class="panel">
+            <div class="panel-heading text-muted text-center clearfix">
+                <h3 class="modal-title">Categories Actions</h3>
+                <div class="text-right pull-right">
+                    <a href="{{ path('add_category') }}" class="btn btn-primary"><span class="fa fa-plus"></span> Add
+                        Category</a>
+                </div>
+            </div>
 
-        <div class="panel-body">
-            <ul class="list-group">
-                {% if categories.categories|length > 0 %}
-                    {% for category in categories.categories %}
-                        <li class="list-group-item">
-                            {{ category.name }}
-                            <button class="ri">Edit</button>
-                        </li>
-                    {% endfor %}
-                {% else %}
-                    <li class="text-muted">No categories</li>
-                {% endif %}
-            </ul>
+            <div class="panel-body">
+                <ul class="list-group">
+                    {% if categories.categories|length > 0 %}
+                        {% for category in categories.categories %}
+                            <li class="list-group-item clearfix">
+                                {{ category.name }}
+                                <div class="text-right pull-right">
+                                    <a class="btn btn-primary"
+                                       href="{{ path('edit_category', {id:category.id}) }}"><span
+                                                class="fa fa-edit"></span> Edit</a>
+                                    <a class="btn btn-danger"
+                                       href="{{ path('delete_category', {id:category.id}) }}"><span
+                                                class="fa fa-trash-o"></span> Delete</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="text-muted">No categories</li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
 {% endblock %}
