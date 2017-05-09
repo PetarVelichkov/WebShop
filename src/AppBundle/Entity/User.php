@@ -60,8 +60,10 @@ class User implements UserInterface
 
 
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="owner")
+     * @var Product[]|ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", inversedBy="users")
+     * @ORM\JoinTable(name="cart")
      */
     private $products;
 

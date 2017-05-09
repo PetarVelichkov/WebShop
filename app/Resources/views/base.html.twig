@@ -88,7 +88,10 @@
                         <i class="fa fa-search"></i>
                     </button>
                     <a class="btn btn-default navbar-toggle" href="#">
-                        <i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Cart ({{ carts|length }})</span>
+                        <i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Cart
+                            {% if app.user.products|length > 0 %}
+                                ({{ app.user.products|length }})
+                            {% endif %}</span>
                     </a>
                 </div>
             </div>
@@ -108,8 +111,11 @@
             <div class="navbar-buttons">
 
                 <div class="navbar-collapse collapse right" id="basket-overview">
-                    <a href="{{ path('cart') }}" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span
-                                class="hidden-sm">Cart ({{ carts|length }})</span></a>
+                    <a href="{{ path('cart') }}" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Cart
+                            {% if app.user.products|length > 0 %}
+                                ({{ app.user.products|length }})
+                            {% endif %}
+                        </span></a>
                 </div>
                 <!--/.nav-collapse -->
 

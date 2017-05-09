@@ -31,7 +31,7 @@
                 <p class="price">€{{ product.price }}</p>
 
                 <div class="text-center buttons">
-                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                    <a href="{{ path('add_to_cart', {id: product.id}) }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                 </div>
                 {% if app.getUser() and app.getUser().isAdmin() %}
 

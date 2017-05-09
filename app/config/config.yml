@@ -44,7 +44,7 @@ twig:
 
     globals:
         categories: '@category_container'
-        carts: '@carts_container'
+
 
 # Doctrine Configuration
 doctrine:

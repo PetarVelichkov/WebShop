@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Cart;
 use AppBundle\Entity\Product;
+use AppBundle\Entity\User;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -21,31 +22,49 @@ class CartController extends Controller
      */
     public function viewCartAction()
     {
-        $carts = $this->getDoctrine()->getRepository(Cart::class)->findBy([
-            'owner' => $this->getUser()
-        ]);
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+        $products = $user->getProducts();
 
-        return $this->render('webshop/cart.html.twig', ['carts' => $carts]);
+        $total = array_sum(
+            array_map(function (Product $p) {
+                return $p->getPrice();
+            }, $products->toArray())
+        );
+
+        return $this->render('webshop/cart.html.twig', [
+            'cart' => $user->getProducts(),
+            'total' => $total
+        ]);
     }
 
     /**
      * @Route("/cart/add/{id}", name="add_to_cart")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
+     * @Method("GET")
+     *
      * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function addToCartAction($id)
     {
-        $cart = new Cart();
-        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
         $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
 
-        $cart->setProduct($product);
-        $cart->setOwner($this->getUser());
+        if ($user->getProducts()->contains($product)) {
+            $this->addFlash("danger", "Product already exists in your cart.");
+            return $this->redirectToRoute('products');
+        }
+        $em = $this->getDoctrine()->getManager();
 
-        $em->persist($cart);
+        $user->getProducts()->add($product);
+        $em->persist($user);
         $em->flush();
+
+        $this->addFlash("success", "Product added to cart.");
 
         return $this->redirectToRoute('cart');
     }

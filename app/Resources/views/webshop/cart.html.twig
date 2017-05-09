@@ -12,29 +12,27 @@
         <form method="post" action="checkout1.html">
 
             <h1>Shopping cart</h1>
-            <p class="text-muted">You currently have {{ carts|length }} item(s) in your cart.</p>
+            <p class="text-muted">You currently have {{ cart|length }} item(s) in your cart.</p>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                     <tr>
                         <th colspan="2">Product</th>
                         <th>Unit price</th>
-                        <th colspan="2">Total</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for cart in carts %}
+                    {% for product in cart %}
                     <tr>
                         <td>
                             <a href="#">
-                                <img src="{{ asset(cart.product.getPicture()) }}" alt="">
+                                <img src="{{ asset(product.getPicture()) }}" alt="">
                             </a>
                         </td>
-                        <td><a href="{{ path('product_view', {id: cart.product.id}) }}">{{ cart.product.name }}</a>
+                        <td><a href="{{ path('product_view', {id: product.id}) }}">{{ product.name }}</a>
                         </td>
-                        <td>{{ cart.product.price }}</td>
-                        <td>€0.00</td>
-                        <td><a href="{{ path('cart_delete_product', {id: cart.id}) }}"><i class="fa fa-trash-o"></i></a>
+                        <td>{{ product.price }}</td>
+                        <td><a href="{{ path('cart_delete_product', {id: product.id}) }}"><i class="fa fa-trash-o"></i></a>
                         </td>
                     </tr>
 
@@ -44,7 +42,7 @@
                     <tfoot>
                     <tr>
                         <th colspan="5">Total</th>
-                        <th colspan="2">$446.00</th>
+                        <th colspan="2">€{{ total }}</th>
                     </tr>
                     </tfoot>
                 </table>
@@ -79,19 +77,19 @@
                 <tbody>
                 <tr>
                     <td>Order subtotal</td>
-                    <th>$446.00</th>
+                    <th>€{{ total }}</th>
                 </tr>
                 <tr>
                     <td>Shipping and handling</td>
-                    <th>$10.00</th>
+                    <th>€10.00</th>
                 </tr>
                 <tr>
                     <td>Tax</td>
-                    <th>$0.00</th>
+                    <th>€0.00</th>
                 </tr>
                 <tr class="total">
                     <td>Total</td>
-                    <th>$456.00</th>
+                    <th>€{{ total + 10 }}</th>
                 </tr>
                 </tbody>
             </table>
