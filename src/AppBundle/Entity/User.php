@@ -68,6 +68,14 @@ class User implements UserInterface
     private $products;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductsOrder", mappedBy="user")
+     * @ORM\OrderBy({"date":"desc"})
+     *
+     * @var ProductsOrder[]|ArrayCollection $orders
+     */
+    private $orders;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
@@ -303,6 +311,18 @@ class User implements UserInterface
     public function addProducts(Product $product)
     {
         $this->products[] = $product;
+
+        return $this;
+    }
+
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    public function setOrders($orders)
+    {
+        $this->orders = $orders;
 
         return $this;
     }

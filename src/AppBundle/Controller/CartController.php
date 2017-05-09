@@ -92,7 +92,7 @@ class CartController extends Controller
         $em->flush();
 
         $this->addFlash('success', 'Product was removed!');
-        
+
         return $this->redirectToRoute("cart");
     }
 }

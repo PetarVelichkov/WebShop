@@ -89,9 +89,12 @@
                     </button>
                     <a class="btn btn-default navbar-toggle" href="#">
                         <i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Cart
-                            {% if app.user.products|length > 0 %}
-                                ({{ app.user.products|length }})
-                            {% endif %}</span>
+                            {% if app.user %}
+                                {% if app.user.products|length > 0 %}
+                                    ({{ app.user.products|length }})
+                                {% endif %}
+                            {% endif %}
+                        </span>
                     </a>
                 </div>
             </div>
@@ -112,8 +115,10 @@
 
                 <div class="navbar-collapse collapse right" id="basket-overview">
                     <a href="{{ path('cart') }}" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Cart
-                            {% if app.user.products|length > 0 %}
-                                ({{ app.user.products|length }})
+                            {% if app.user %}
+                                {% if app.user.products|length > 0 %}
+                                    ({{ app.user.products|length }})
+                                {% endif %}
                             {% endif %}
                         </span></a>
                 </div>
