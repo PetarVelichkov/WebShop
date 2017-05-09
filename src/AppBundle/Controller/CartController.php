@@ -78,23 +78,21 @@ class CartController extends Controller
      */
     public function deleteProductFromCartAction($id)
     {
-        $cart = $this->getDoctrine()->getRepository(Cart::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($cart !== null) {
-            $em = $this->getDoctrine()->getManager();
-            try {
-                $em->remove($cart);
-                $em->flush();
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+        $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
 
-                $this->addFlash('success', 'Product removed!');
+        $user->getProducts()->removeElement($product);
 
-            } catch (ForeignKeyConstraintViolationException $e) {
-                $this->addFlash('error', 'Cannot delete this category!');
-            }
-        }
+        $em->persist($user);
+        $em->flush();
 
-
-
+        $this->addFlash('success', 'Product was removed!');
+        
         return $this->redirectToRoute("cart");
     }
 }
