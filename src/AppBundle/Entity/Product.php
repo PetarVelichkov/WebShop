@@ -220,13 +220,7 @@ class Product
         return $this->description;
     }
 
-    /**
-     * Set price
-     *
-     * @param string $price
-     *
-     * @return Product
-     */
+
     public function setPrice($price)
     {
         $this->price = $price;
@@ -234,11 +228,7 @@ class Product
         return $this;
     }
 
-    /**
-     * Get price
-     *
-     * @return string
-     */
+
     public function getPrice()
     {
         return $this->price;

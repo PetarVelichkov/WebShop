@@ -45,7 +45,6 @@ class User implements UserInterface
     private $fullName;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="money", type="decimal", precision=10, scale=0)
      */
@@ -194,11 +193,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * Get money
-     *
-     * @return string
-     */
+
     public function getMoney()
     {
         return $this->money;

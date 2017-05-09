@@ -95,4 +95,72 @@ class CartController extends Controller
 
         return $this->redirectToRoute("cart");
     }
+
+
+    /**
+     * @Route("/cart/checkout", name="checkout_cart")
+     *
+     * @return RedirectResponse
+     */
+    public function cardCheckout()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+        $userMoney = $user->getMoney();
+        $cartProducts = $user->getProducts();
+
+        $cartTotalSum = array_sum(
+            array_map(function (Product $p) {
+                return $p->getPrice();
+            }, $cartProducts->toArray())
+        );
+
+        foreach ($cartProducts as $product) {
+            if ($product->getQuantity() <= 0) {
+                $this->addFlash('danger', 'Some products are out of stock!');
+
+                $this->redirectToRoute('cart');
+            }
+        }
+
+        if ($cartTotalSum > $userMoney) {
+            $this->addFlash('danger', 'You do not have enough money!');
+
+            $this->redirectToRoute('cart');
+        }
+
+        foreach ($cartProducts as $product) {
+            /**
+             * @var Product $product
+             */
+            $product->setQuantity($product->getQuantity() - 1);
+            $user->getProducts()->removeElement($product);
+            //TODO productPlain text???
+
+            /**
+             * @var User $owner
+             */
+            $owner = $product->getOwner();
+            if ($owner){
+                $owner->addMoney($product->getPrice());
+                $em->persist($owner);
+            }
+        }
+
+        $user->setMoney($userMoney - $cartTotalSum);
+
+        //TODO orders
+
+        $em->persist($user);
+        $em->flush();
+
+        $this->addFlash('success', 'Checkout completed!');
+
+        return $this->redirectToRoute('homepage');
+
+    }
 }
