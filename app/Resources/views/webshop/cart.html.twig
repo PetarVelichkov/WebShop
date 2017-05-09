@@ -12,53 +12,34 @@
         <form method="post" action="checkout1.html">
 
             <h1>Shopping cart</h1>
-            <p class="text-muted">You currently have 3 item(s) in your cart.</p>
+            <p class="text-muted">You currently have {{ carts|length }} item(s) in your cart.</p>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                     <tr>
                         <th colspan="2">Product</th>
-                        <th>Quantity</th>
                         <th>Unit price</th>
-                        <th>Discount</th>
                         <th colspan="2">Total</th>
                     </tr>
                     </thead>
                     <tbody>
+                    {% for cart in carts %}
                     <tr>
                         <td>
                             <a href="#">
-                                <img src="img/detailsquare.jpg" alt="White Blouse Armani">
+                                <img src="{{ asset(cart.product.getPicture()) }}" alt="">
                             </a>
                         </td>
-                        <td><a href="#">White Blouse Armani</a>
+                        <td><a href="{{ path('product_view', {id: cart.product.id}) }}">{{ cart.product.name }}</a>
                         </td>
-                        <td>
-                            <input type="number" value="2" class="form-control">
-                        </td>
-                        <td>$123.00</td>
-                        <td>$0.00</td>
-                        <td>$246.00</td>
-                        <td><a href="#"><i class="fa fa-trash-o"></i></a>
+                        <td>{{ cart.product.price }}</td>
+                        <td>€0.00</td>
+                        <td><a href="{{ path('cart_delete_product', {id: cart.id}) }}"><i class="fa fa-trash-o"></i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <img src="img/basketsquare.jpg" alt="Black Blouse Armani">
-                            </a>
-                        </td>
-                        <td><a href="#">Black Blouse Armani</a>
-                        </td>
-                        <td>
-                            <input type="number" value="1" class="form-control">
-                        </td>
-                        <td>$200.00</td>
-                        <td>$0.00</td>
-                        <td>$200.00</td>
-                        <td><a href="#"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
+
+                    {% endfor %}
+
                     </tbody>
                     <tfoot>
                     <tr>
@@ -120,4 +101,3 @@
 </div>
 
 {% endblock %}
-

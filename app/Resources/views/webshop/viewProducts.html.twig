@@ -42,7 +42,7 @@
 
                             <p class="buttons">
                                 <a href="{{ path('product_view', {id:product.id}) }}" class="btn btn-default">View detail</a>
-                                <a href="basket.html" class="btn btn-info"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <a href="{{ path('add_to_cart', {id:product.id}) }}" class="btn btn-info"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                             </p>
                         </div>
                         <!-- /.text -->

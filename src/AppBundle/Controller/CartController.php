@@ -4,9 +4,12 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Cart;
 use AppBundle\Entity\Product;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CartController extends Controller
 {
@@ -21,7 +24,6 @@ class CartController extends Controller
         $carts = $this->getDoctrine()->getRepository(Cart::class)->findBy([
             'owner' => $this->getUser()
         ]);
-
 
         return $this->render('webshop/cart.html.twig', ['carts' => $carts]);
     }
@@ -46,5 +48,34 @@ class CartController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('cart');
+    }
+
+
+    /**
+     * @Route("/delete/{id}", name="cart_delete_product")
+     *
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function deleteProductFromCartAction($id)
+    {
+        $cart = $this->getDoctrine()->getRepository(Cart::class)->find($id);
+
+        if ($cart !== null) {
+            $em = $this->getDoctrine()->getManager();
+            try {
+                $em->remove($cart);
+                $em->flush();
+
+                $this->addFlash('success', 'Product removed!');
+
+            } catch (ForeignKeyConstraintViolationException $e) {
+                $this->addFlash('error', 'Cannot delete this category!');
+            }
+        }
+
+
+
+        return $this->redirectToRoute("cart");
     }
 }

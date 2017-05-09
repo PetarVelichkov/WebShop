@@ -23,6 +23,8 @@ class HomeController extends Controller
             ->getQuery()
             ->getResult();
 
+
+
         return $this->render('webshop/index.html.twig',[
             "products" => $products
         ]);

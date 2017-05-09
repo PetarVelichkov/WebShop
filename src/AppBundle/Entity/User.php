@@ -59,6 +59,13 @@ class User implements UserInterface
     private $roles;
 
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="owner")
+     */
+    private $products;
+
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
@@ -278,16 +285,11 @@ class User implements UserInterface
         return $this->fullName;
     }
 
-    /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="owner")
-     */
-    private $products;
 
     /**
      * @return ArrayCollection
      */
-    public function getProducts(): ArrayCollection
+    public function getProducts()
     {
         return $this->products;
     }

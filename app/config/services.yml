@@ -13,6 +13,16 @@ services:
         calls:
          - method: getCategories
 
+    carts_container:
+        class: AppBundle\Services\CartContainer
+        arguments: [ '@doctrine.orm.entity_manager' ]
+        calls:
+         - method: getCarts
+
     app.picture_uploader:
         class: AppBundle\Services\FileUploader
         arguments: ['%upload_dir%']
+
+    app.cart_service:
+        class: AppBundle\Services\CartService
+        autowire: true

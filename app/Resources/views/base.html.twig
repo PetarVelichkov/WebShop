@@ -88,7 +88,7 @@
                         <i class="fa fa-search"></i>
                     </button>
                     <a class="btn btn-default navbar-toggle" href="#">
-                        <i class="fa fa-shopping-cart"></i> <span class="hidden-xs">3 items in cart</span>
+                        <i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Cart ({{ carts|length }})</span>
                     </a>
                 </div>
             </div>
@@ -109,7 +109,7 @@
 
                 <div class="navbar-collapse collapse right" id="basket-overview">
                     <a href="{{ path('cart') }}" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span
-                                class="hidden-sm">Shopping cart</span></a>
+                                class="hidden-sm">Cart ({{ carts|length }})</span></a>
                 </div>
                 <!--/.nav-collapse -->
 
