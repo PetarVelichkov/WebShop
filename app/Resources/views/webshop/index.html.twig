@@ -35,11 +35,15 @@
                         </a>
                         <div class="text">
                             <h3><a href="{{ path('product_view', {id:product.id}) }}">{{ product.name }}</a></h3>
-                            <p class="price">€{{ product.price }}</p>
-                            <p class="price">Quantity: {{ product.quantity }}</p>
+                            <p class="label label-warning">Quantity: {{ product.quantity }}</p>
+                            <hr>
+                            <p class="price bg-primary">€{{ product.price }}</p>
+                            <hr>
+                            <p class="price bg-primary">Seller: {{ product.getOwner() }}</p>
+
                             <p class="buttons">
                                 <a href="{{ path('product_view', {id:product.id}) }}" class="btn btn-default">View detail</a>
-                                <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <a href="basket.html" class="btn btn-info"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                             </p>
                         </div>
                         <!-- /.text -->

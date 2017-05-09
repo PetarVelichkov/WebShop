@@ -103,44 +103,6 @@ class CategoryAdminController extends Controller
     /**
      * @Route("/categories/delete/{id}", name="delete_category")
      *
-     * @param Request $request
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-//    public function deleteCategory(Request $request, $id)
-//    {
-//        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
-//
-//        if ($category === null) {
-//            return $this->redirectToRoute('view_categories');
-//        }
-//
-//        $form = $this->createForm(CategoryType::class, $category);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            try {
-//                $em->remove($category);
-//                $em->flush();
-//
-//                $this->addFlash('success', 'Category deleted!');
-//            } catch (ForeignKeyConstraintViolationException $e) {
-//                $this->addFlash('error', 'Cannot delete this category!');
-//            }
-//
-//            return $this->redirectToRoute('view_categories', ['id' => $category->getId()]);
-//        }
-//
-//        return $this->render('webshop/Admin/deleteCategory.html.twig', [
-//            'category' => $category,
-//            'form' => $form->createView()
-//        ]);
-//    }
-
-    /**
-     * @Route("/categories/delete/{id}", name="delete_category")
-     *
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
      * @param Request $request
