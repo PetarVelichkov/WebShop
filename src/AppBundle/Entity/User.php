@@ -211,46 +211,17 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * Returns the roles granted to the user.
-     *
-     * <code>
-     * public function getRoles()
-     * {
-     *     return array('ROLE_USER');
-     * }
-     * </code>
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return array
-     */
+
     public function getRoles()
     {
-        $rolesStr = [];
-
-        foreach ($this->roles as $role) {
-            /**
-             * @var $role Role
-             */
-            $rolesStr[] = $role->getRole();
-        }
-
-        return $rolesStr;
+        return $this->roles->toArray();
     }
 
-    /**
-     * @param param Role $role
-     *
-     * @return User
-     */
+
     public function addRole(Role $role)
     {
         $this->roles[] = $role;
 
-        return $this;
     }
 
     /**

@@ -69,16 +69,7 @@ class Role implements RoleInterface
         return $this->name;
     }
 
-    /**
-     * Returns the role.
-     *
-     * This method returns a string representation whenever possible.
-     *
-     * When the role cannot be represented with sufficient precision by a
-     * string, it should return null.
-     *
-     * @return string|null A string representation of the role, or null
-     */
+
     public function getRole()
     {
         return $this->getName();
@@ -86,7 +77,7 @@ class Role implements RoleInterface
 
     public  function __toString()
     {
-        return ucfirst(strtolower(explode("_", $this->name)[1]));
+        return strval($this->name);
     }
 }
 

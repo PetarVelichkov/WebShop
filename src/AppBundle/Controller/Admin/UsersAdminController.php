@@ -44,7 +44,7 @@ class UsersAdminController extends Controller
 
     /**
      * @Route("/users/delete/{id}", name="admin_delete_user")
-     * 
+     *
      *
      * @param $id
      * @return RedirectResponse
@@ -84,7 +84,7 @@ class UsersAdminController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash("success", "User {$user->getEmail()} updated successfully!");
+            $this->addFlash("success", "User updated successfully!");
 
             return $this->redirectToRoute("admin_list_users");
         }
@@ -93,4 +93,7 @@ class UsersAdminController extends Controller
             "edit_form" => $form->createView()
         ]);
     }
+
+
+
 }

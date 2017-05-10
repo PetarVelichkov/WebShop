@@ -16,7 +16,6 @@ class UserEditType extends AbstractType
             ->add("email")
             ->add("fullName")
             ->add("money");
-
     }
 
     public function configureOptions(OptionsResolver $resolver)
