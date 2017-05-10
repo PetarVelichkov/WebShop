@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div id="all">
+
+        <div id="content">
+            <div class="container">
+                <div class="col-md-6">
+                    <div class="box">
+                        <h2 class="text-muted text-center">Edit product</h2>
+                        <hr/>
+                        {{ form_start(add_form) }}
+
+                        {{ form_row(add_form.name) }}
+                        {{ form_row(add_form.description) }}
+                        {{ form_row(add_form.price) }}
+
+                        <button class="btn btn-success" formnovalidate><span class="fa fa-plus"></span> Sell
+                        </button>
+
+
+                    </div>
+
+                    {{ form_end(add_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}
+

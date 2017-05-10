@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block sidebar %}
+
+    <div class="col-md-3">
+        <!-- *** MENUS AND FILTERS ***
+    _________________________________________________________ -->
+        <div class="panel panel-default sidebar-menu">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">Categories</h3>
+            </div>
+
+            <div class="panel-body">
+                <ul class="nav nav-pills nav-stacked">
+                    {% if categories.categories|length > 0 %}
+                        {% for category in categories.categories %}
+                            <li>
+                                <a href="{{ path('category_id', {id:category.id}) }}" class="list-group-item">{{ category.name }}</a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="text-muted">No categories</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block main %}
+
+    <div class="col-md-9" id="customer-orders">
+        <div class="box">
+            <h1>Admin users list</h1>
+
+            <hr/>
+
+            {% if users|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Full Name</th>
+                            <th>Money</th>
+                            <th>Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <th>#{{ user.id }}</th>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.fullName }}</td>
+                                <td>{{ user.money }}</td>
+                                <td>{{ user.roles|join(', ') }}</td>
+                                <td><a href="{{ path('admin_edit_user', {id: user.id}) }}" class="btn btn-primary"><span class="fa fa-edit"></span> Edit</a>
+                                </td>
+                                <td><a href="{{ path('admin_delete_user', {id: user.id}) }}" class="btn btn-danger"><span class="fa fa-trash-o"></span> Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pages text-center text-large">
+                    {{ knp_pagination_render(users) }}
+                </div>
+            {% else %}
+                <p class="text-large">You don't have any orders yet :)</p>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+

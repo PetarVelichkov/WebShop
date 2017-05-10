@@ -22,11 +22,11 @@
                             <div class="panel-body">
 
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active">
+                                    <li>
                                         <a href="{{ path('profile') }}"><i class="fa fa-user"></i> My account</a>
                                     </li>
                                     <li>
-                                        <a href="customer-orders.html"><i class="fa fa-list"></i> My orders</a>
+                                        <a href="{{ path('user_orders') }}"><i class="fa fa-list"></i> My orders</a>
                                     </li>
                                     <li>
                                         <a href="{{ path('security_logout') }}"><i class="fa fa-sign-out"></i>
@@ -89,8 +89,12 @@
                                     </table>
                                 </div>
                             </div>
+                            <div>
+                                <a class="btn btn-primary" href="{{ path('edit_profile') }}"><span class="fa fa-edit"></span> Edit</a>
+                            </div>
                         </div>
                     </div>
+
                 {% endblock %}
 
             </div>

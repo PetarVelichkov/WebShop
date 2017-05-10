@@ -55,13 +55,7 @@ class Role implements RoleInterface
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Role
-     */
+
     public function setName($name)
     {
         $this->name = $name;
@@ -69,11 +63,7 @@ class Role implements RoleInterface
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
+
     public function getName()
     {
         return $this->name;
@@ -92,6 +82,11 @@ class Role implements RoleInterface
     public function getRole()
     {
         return $this->getName();
+    }
+
+    public  function __toString()
+    {
+        return ucfirst(strtolower(explode("_", $this->name)[1]));
     }
 }
 

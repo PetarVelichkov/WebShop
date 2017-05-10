@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block sidebar %}
+
+    <div class="col-md-3">
+        <!-- *** CUSTOMER MENU ***-->
+
+        <div class="panel panel-default sidebar-menu">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">Customer section</h3>
+            </div>
+
+            <div class="panel-body">
+
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="{{ path('profile') }}"><i class="fa fa-user"></i> My account</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('user_orders') }}"><i class="fa fa-list"></i> My orders</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('security_logout') }}"><i class="fa fa-sign-out"></i>
+                            Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /.col-md-3 -->
+
+        <!-- *** CUSTOMER MENU END *** -->
+    </div>
+
+{% endblock %}
+
+{% block main %}
+
+    <div class="col-md-9" id="customer-orders">
+        <div class="box">
+            <h1>My orders</h1>
+            <p class="lead">Your orders on one place.</p>
+
+            <hr/>
+
+
+            {% if orders|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <th># {{ order.id }}</th>
+                                <td>{{ order.date|date }}</td>
+                                <td>€{{ order.total }}</td>
+                                <td>
+                                    <span class="label label-info">{{ order.verified ? 'Completed' : 'Being prepared' }}</span>
+                                </td>
+                                <td><a href="{{ path('view_order', {id: order.id}) }}" class="btn btn-primary btn-sm">View</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pages text-center text-large">
+                    {{ knp_pagination_render(orders) }}
+                </div>
+            {% else %}
+                <p class="text-large">You don't have any orders yet :)</p>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+

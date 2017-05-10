@@ -6,6 +6,7 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
+use AppBundle\Form\ProfileEditType;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -69,5 +70,38 @@ class UserController extends Controller
                     ]);
 
         return $this->render('user/profile.html.twig', ['user' => $user, 'products' => $products]);
+    }
+
+
+    /**
+     * @Route("/profile/edit", name="edit_profile")
+     * @Security(expression="is_granted('IS_AUTHENTICATED_FULLY')")
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editProfileAction(Request $request)
+    {
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+
+        $form = $this->createForm(ProfileEditType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash("success", "Profile updated!");
+
+            return $this->redirectToRoute("profile");
+        }
+
+       return $this->render('webshop/edit_profile.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

@@ -136,14 +136,16 @@ class CartController extends Controller
         }
 
 
-        $productsNames = [];
+        $productsIds = [];
+
+
         foreach ($cartProducts as $product) {
             /**
              * @var Product $product
              */
             $product->setQuantity($product->getQuantity() - 1);
             $user->getProducts()->removeElement($product);
-            $productsNames[] = $product->getName();
+            $productsIds[] = $product->getId();
 
             /**
              * @var User $owner
@@ -161,9 +163,10 @@ class CartController extends Controller
         $order = new ProductsOrder();
         $order->setUser($user);
         $order->setDate($date);
-        $order->setProducts($productsNames);
+        $order->setProducts($productsIds);
         $order->setTotal($cartTotalSum);
         $order->setVerified(false);
+
 
         $em->persist($order);
         $em->persist($user);

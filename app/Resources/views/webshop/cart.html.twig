@@ -31,7 +31,7 @@
                         </td>
                         <td><a href="{{ path('product_view', {id: product.id}) }}">{{ product.name }}</a>
                         </td>
-                        <td>{{ product.price }}</td>
+                        <td>€{{ product.price }}</td>
                         <td><a href="{{ path('cart_delete_product', {id: product.id}) }}"><i class="fa fa-trash-o"></i></a>
                         </td>
                     </tr>

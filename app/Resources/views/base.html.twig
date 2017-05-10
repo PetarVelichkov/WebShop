@@ -104,7 +104,7 @@
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="{{ path('homepage') }}">Webshop</a>
                     </li>
-                    <li class="active"><a href="{{ path('homepage') }}">Home</a>
+                    <li><a href="{{ path('homepage') }}">Home</a>
                     </li>
                     <li><a href="{{ path('products') }}">Products</a>
                     </li>
@@ -141,13 +141,18 @@
 {% block admin %}
 
     {% if app.getUser() and (app.getUser().isAdmin() or app.getUser().isEditor()) %}
-        <div class="nav nav-tabs" role="navigation" id="navbar">
+        <div class="nav nav-tabs navbar-default text-large"  role="navigation" id="navbar">
             <div class="container">
                 <div class="navbar-collapse collapse" id="navigation">
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="text-muted bg-primary"><a>ADMIN PANEL  </a></li>
                         <li><a href="{{ path('add_product') }}">Add Product</a>
                         </li>
                         <li><a href="{{ path('view_categories') }}">Edit Categories</a>
+                        </li>
+                        <li ><a href="{{ path('admin_list_orders') }}">Edit Orders</a>
+                        </li>
+                        <li><a href="{{ path('admin_list_users') }}">Edit Users</a>
                         </li>
                     </ul>
                 </div>

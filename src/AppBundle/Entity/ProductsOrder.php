@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -141,19 +142,14 @@ class ProductsOrder
         return $this->verified;
     }
 
-    /**
-     * Set products
-     *
-     * @param array $products
-     *
-     * @return ProductsOrder
-     */
+
     public function setProducts($products)
     {
         $this->products = $products;
 
         return $this;
     }
+
 
     /**
      * Get products

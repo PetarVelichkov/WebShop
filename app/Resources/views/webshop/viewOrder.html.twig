@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block sidebar %}
+
+    <div class="col-md-3">
+        <!-- *** CUSTOMER MENU ***-->
+
+        <div class="panel panel-default sidebar-menu">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">Customer section</h3>
+            </div>
+
+            <div class="panel-body">
+
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="{{ path('profile') }}"><i class="fa fa-user"></i> My account</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('user_orders') }}"><i class="fa fa-list"></i> My orders</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('security_logout') }}"><i class="fa fa-sign-out"></i>
+                            Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /.col-md-3 -->
+
+        <!-- *** CUSTOMER MENU END *** -->
+    </div>
+
+{% endblock %}
+
+{% block main %}
+
+    <div class="col-md-9" id="customer-order">
+        <div class="box">
+            <h1>Order #{{ order.id }}</h1>
+
+            <p class="lead">Order #{{ order.id }} was placed on <strong>{{ order.date|date }}</strong> and is currently <strong>{{ order.verified ? 'Completed' : 'Being prepared' }}</strong>.</p>
+
+            <hr>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Product</th>
+                        <th>Unit price</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if products|length > 0 %}
+                        {% for product in products %}
+                            <tr>
+                                <td>
+                                    <a href="#">
+                                        <img src="{{ asset(product.picture) }}" alt="">
+                                    </a>
+                                </td>
+                                <td><a href="{{ path('product_view', {id: product.id}) }}">{{ product.name }}</a>
+                                </td>
+                                <td>€{{ product.price }}</td>
+                                <td><a href="{{ path('sell_product', {id: product.id}) }}" class="btn btn-primary btn-sm">Sell</a>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="5" class="text-right">Total</th>
+                        <th>€{{ total }}</th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+            <!-- /.table-responsive -->
+
+        </div>
+    </div>
+
+{% endblock %}
