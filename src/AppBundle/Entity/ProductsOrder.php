@@ -99,14 +99,8 @@ class ProductsOrder
         return $this->id;
     }
 
-    /**
-     * Set datetime
-     *
-     * @param string $date
-     *
-     * @return ProductsOrder
-     */
-    public function setDatetime($date)
+
+    public function setDate($date)
     {
         $this->date = $date;
 
@@ -118,7 +112,7 @@ class ProductsOrder
      *
      * @return string
      */
-    public function getDatetime()
+    public function getDate()
     {
         return $this->date;
     }

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Cart;
 use AppBundle\Entity\Product;
+use AppBundle\Entity\ProductsOrder;
 use AppBundle\Entity\User;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -112,6 +113,7 @@ class CartController extends Controller
         $user = $this->getUser();
         $userMoney = $user->getMoney();
         $cartProducts = $user->getProducts();
+        $date = new \DateTime();
 
         $cartTotalSum = array_sum(
             array_map(function (Product $p) {
@@ -133,13 +135,15 @@ class CartController extends Controller
             $this->redirectToRoute('cart');
         }
 
+
+        $productsNames = [];
         foreach ($cartProducts as $product) {
             /**
              * @var Product $product
              */
             $product->setQuantity($product->getQuantity() - 1);
             $user->getProducts()->removeElement($product);
-            //TODO productPlain text???
+            $productsNames[] = $product->getName();
 
             /**
              * @var User $owner
@@ -153,8 +157,15 @@ class CartController extends Controller
 
         $user->setMoney($userMoney - $cartTotalSum);
 
-        //TODO orders
 
+        $order = new ProductsOrder();
+        $order->setUser($user);
+        $order->setDate($date);
+        $order->setProducts($productsNames);
+        $order->setTotal($cartTotalSum);
+        $order->setVerified(false);
+
+        $em->persist($order);
         $em->persist($user);
         $em->flush();
 

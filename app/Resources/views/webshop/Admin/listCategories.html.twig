@@ -14,8 +14,8 @@
 
             <div class="panel-body">
                 <ul class="list-group">
-                    {% if categories.categories|length > 0 %}
-                        {% for category in categories.categories %}
+                    {% if categories_1|length > 0 %}
+                        {% for category in categories_1 %}
                             <li class="list-group-item clearfix">
                                 {{ category.name }}
                                 <div class="text-right pull-right">
@@ -28,6 +28,9 @@
                                 </div>
                             </li>
                         {% endfor %}
+                        <div class="pages text-center">
+                            {{ knp_pagination_render(categories_1) }}
+                        </div>
                     {% else %}
                         <li class="text-muted">No categories</li>
                     {% endif %}

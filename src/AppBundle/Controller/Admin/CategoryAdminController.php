@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Admin;
 
 use AppBundle\Entity\Category;
 use AppBundle\Form\CategoryType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -16,11 +17,28 @@ class CategoryAdminController extends Controller
     /**
      * @Route("/categories", name="view_categories")
      *
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listCategories()
+    public function listCategories(Request $request)
     {
-        return $this->render('webshop/Admin/listCategories.html.twig');
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+
+        $pager = $this->get('knp_paginator');
+        /** @var ArrayCollection|Category[] $categories */
+        $categories_1 = $pager->paginate(
+            $repository
+                ->createQueryBuilder('cat')
+                ->orderBy('cat.id', 'asc')
+                ->getQuery()
+                ->getResult(),
+            $request->query->getInt('page', 1),
+            6
+        );
+
+        return $this->render('webshop/Admin/listCategories.html.twig', [
+            'categories_1' => $categories_1
+        ]);
     }
 
 

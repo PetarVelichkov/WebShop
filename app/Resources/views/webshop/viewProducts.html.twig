@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
+{% if products|length > 0 %}
     <div class="col-md-9">
+        <div class="pages text-center text-large">
+            {{ knp_pagination_render(products)}}
+        </div>
         <div class="row products">
             {% for index,product in products %}
                 {% if index % 3 == 0 and index > 0 %}
@@ -52,6 +56,11 @@
 
             {% endfor %}
         </div>
+        <div class="pages text-center text-large">
+            {{ knp_pagination_render(products) }}
+        </div>
     </div>
-
+{% else %}
+    <p>No products yet. :(</p>
+{% endif %}
 {% endblock %}
