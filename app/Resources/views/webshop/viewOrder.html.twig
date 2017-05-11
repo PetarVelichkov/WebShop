@@ -63,8 +63,7 @@
                                         <img src="{{ asset(product.picture) }}" alt="">
                                     </a>
                                 </td>
-                                <td><a href="{{ path('product_view', {id: product.id}) }}">{{ product.name }}</a>
-                                </td>
+                                <td>{{ product.name }}</td>
                                 <td>€{{ product.price }}</td>
                                 <td><a href="{{ path('sell_product', {id: product.id}) }}" class="btn btn-primary btn-sm">Sell</a>
                                 </td>

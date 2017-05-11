@@ -108,6 +108,8 @@ class CategoryAdminController extends Controller
            $em->persist($category);
            $em->flush();
 
+            $this->addFlash('success', 'Category was edited successfully!');
+
            return $this->redirectToRoute('view_categories', ['id' => $category->getId()]);
         }
 
@@ -126,14 +128,13 @@ class CategoryAdminController extends Controller
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function deleteProduct($id)
+    public function deleteCategory($id)
     {
         $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
 
         if ($category === null) {
             return $this->redirectToRoute('products');
         }
-
 
         return $this->render('webshop/Admin/deleteCategory.html.twig', [
             'id' => $id
@@ -161,7 +162,7 @@ class CategoryAdminController extends Controller
                 $this->addFlash('success', 'Category deleted!');
 
             } catch (ForeignKeyConstraintViolationException $e) {
-                $this->addFlash('error', 'Cannot delete this category!');
+                $this->addFlash('danger', 'Cannot delete this category!');
             }
         }
 

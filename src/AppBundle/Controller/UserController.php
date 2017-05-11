@@ -47,6 +47,9 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash('success', 'Register successfully!');
+
+
             return $this->redirectToRoute('homepage');
         }
 

@@ -22,6 +22,10 @@ class UserProductsController extends Controller
 
         $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
 
+        $lastName = $product->getName();
+        $lastDescription = $product->getDescription();
+        $lastPrice = $product->getPrice();
+
         $form = $this->createForm(SellProductType::class, $product);
         $form->handleRequest($request);
 
@@ -37,7 +41,13 @@ class UserProductsController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($newProduct);
-//            $em->persist($product);
+
+            $em->flush();
+
+            $product->setName($lastName);
+            $product->setDescription($lastDescription);
+            $product->setPrice($lastPrice);
+            $em->persist($product);
             $em->flush();
 
             $this->addFlash("success", "Product added for sale successfully!");

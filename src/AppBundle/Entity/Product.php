@@ -22,6 +22,7 @@ class Product
      */
     private $id;
 
+
     /**
      * @var string
      *
@@ -147,6 +148,7 @@ class Product
     {
         return $this->id;
     }
+
 
     /**
      * Set name

@@ -1,5 +1,38 @@
 {% extends 'base.html.twig' %}
 
+{% block sidebar %}
+    <div class="col-md-3">
+        <!-- *** CUSTOMER MENU ***-->
+
+        <div class="panel panel-default sidebar-menu">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">Customer section</h3>
+            </div>
+
+            <div class="panel-body">
+
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="{{ path('profile') }}"><i class="fa fa-user"></i> My account</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('user_orders') }}"><i class="fa fa-list"></i> My orders</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('security_logout') }}"><i class="fa fa-sign-out"></i>
+                            Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /.col-md-3 -->
+
+        <!-- *** CUSTOMER MENU END *** -->
+    </div>
+{% endblock %}
+
 {% block main %}
     <div id="all">
 
@@ -28,7 +61,4 @@
     </div>
 {% endblock %}
 
-{% block sidebar %}
-
-{% endblock %}
 

@@ -48,13 +48,15 @@ class ProductAdminController extends Controller
             $em->persist($product);
             $em->flush();
 
+            $this->addFlash('success', 'Product was added successfully!');
+
             return $this->redirectToRoute('products');
         }
 
         return $this->render('webshop/Admin/addProduct.html.twig', ['form' => $form->createView()]);
     }
 
-//TODO moje da imaproblem s route - /admin
+
     /**
      * @Route("/product/admin/edit/{id}", name="admin_edit_product")
      *
@@ -79,6 +81,9 @@ class ProductAdminController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
+
+            $this->addFlash('success', 'Product was edited successfully!');
+
 
             return $this->redirectToRoute('product_view', ['id' => $product->getId()]);
         }
@@ -115,6 +120,9 @@ class ProductAdminController extends Controller
             $em->persist($product);
             $em->flush();
 
+            $this->addFlash('success', 'Product was edited successfully!');
+
+
             return $this->redirectToRoute('product_view', ['id' => $product->getId()]);
         }
 
@@ -141,7 +149,6 @@ class ProductAdminController extends Controller
             return $this->redirectToRoute('products');
         }
 
-
         return $this->render('webshop/Admin/deleteProduct.html.twig', [
             'id' => $id
         ]);
@@ -164,6 +171,8 @@ class ProductAdminController extends Controller
             $em->remove($product);
             $em->flush();
         }
+
+        $this->addFlash('success', 'Product was deleted successfully!');
 
         return $this->redirectToRoute('products');
     }
